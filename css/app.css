@@ -1,0 +1,66 @@
+html {
+  font-size: 15px; }
+
+#bienvenidos-container {
+  background: url(../images/img.jpg);
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden; }
+
+.fixed-top {
+  background: #e11f2a; }
+
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+  text-align: center;
+  text-transform: uppercase; }
+
+.navbar-light .navbar-brand, .navbar-light .navbar-toggler {
+  color: white;
+  font-size: 1.3rem;
+  text-transform: uppercase; }
+
+.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover, .navbar-light .navbar-toggler:focus, .navbar-light .navbar-toggler:hover {
+  color: white; }
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+  color: black;
+  background: rgba(255, 255, 255, 0.9); }
+
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+  text-align: center; }
+
+.navbar-light .navbar-nav .open > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.open, .navbar-light .navbar-nav .nav-link.active {
+  background: white;
+  color: black;
+  text-align: center; }
+
+.texto-bienvenido {
+  color: white;
+  margin-top: 4rem;
+  padding: 3rem; }
+
+.btn-primary {
+  color: #fff;
+  background-color: #f05f40;
+  border-color: #f05f40;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease; }
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #f17f66;
+  border-color: #f05f40; }
+
+/*Estilos Seleccion Excel*/
+#seleccionexcel-container a {
+  color: white;
+  font-weight: bold; }
+
+.card-header {
+  background-color: #e11f2a;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125); }
+
+/*# sourceMappingURL=app.css.map */

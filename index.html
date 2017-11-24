@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="analisisADO">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Productividad por empleado</title>
+    <!-- Incluir AngularJS -->
+    <script src="js/libs/angular-1.6.6/angular.min.js"></script>
+    <script src="js/libs/angular-1.6.6/angular-touch.min.js"></script>
+    <script src="js/libs/angular-1.6.6/angular-animate.min.js"></script>
+    <!-- Incluir js  UI-GRID -->
+    <script src="js/libs/bower-ui-grid-master/ui-grid.min.js"></script>
+    <!-- Incluir css  UI-GRID -->
+    <link rel="stylesheet" href="js/libs/bower-ui-grid-master/ui-grid.min.css">
+    <!-- FileSaver shim for exporting files -->
+    <script src="js/libs/FileSaver.min.js"></script>
+    <!-- SheetJS js-xlsx library -->
+    <script src="js/libs/xlsx.min.js"></script>
+    <!-- SheetJS Service -->
+    <script src="js/libs/SheetJS-angular.js"></script>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Incluir Fuentes de Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- Incluir estilos css -->
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <!-- Incluir ControladorAngular -->
+    <script src="js/Controlleranalisis.js"></script>
+
+    <body ng-controller="analisisCtrl">
+        <!-- HEADER -->
+        <section id="bienvenidos-container">
+            <div class="container">
+                <header class="encabezado">
+                    <nav class="navbar navbar-toggleable-sm navbar-light navbar fixed-top ">
+                        <button class="navbar-toggler navbar-toggler-right " type="button" data-toggle="collapse" data-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Toggle navigation">
+                            &#9776;
+                        </button>
+                        <a class="navbar-brand" href="#">
+                            <img src="images/logo.png" width="70" height="35" class="d-inline-block align-top" alt="">
+                            </a>
+                        <div class="collapse navbar-collapse d-lg-flex flex-row-reverse" id="menuPrincipal">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active ">
+                                    <a class="nav-link" href="#">INICIO <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="#">Datos</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="#">Tabla analisis</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="#">Graficas</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="#">CONTACTO</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </header>
+            </div>
+        </section>
+        <!-- /HEADER -->
+        <!-- Seleccion Excel -->
+        <section id="seleccionexcel-container" class="py-2 text-center">
+            <div class="container">
+                <h1 class="py-3">Análisis de Productividad por empleado</h1>
+                <div id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="card" ng-show="mostrarPanelSeleccion">
+                        <div class="card-header" role="tab" id="headingOne">
+                            <h5 class="mb-0">
+                                <a data-toggle="collapse.show" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                      Seleccion de datos:
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="card-block">
+                                <div class="col-12 ">
+                                    <h3 class="card-title">
+                                            <i class="fa fa-file" aria-hidden="true"></i> Seleccione un Archivo
+                                        </h3>
+                                    <div class="col-6 mx-auto">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-secondary">
+                                                Browse&hellip; <input type="file"  import-sheet-js="" opts="gridOptions" multiple="false" include >
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-danger my-2">Cancelar <i class="fa fa-ban" aria-hidden="true"></i></button>
+                                <button ng-click="llenarCamposExcel();" type="submit" class="btn btn-primary my-2">Generar Informe <i class="fa fa-area-chart" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" ng-show="mostrarTablaExcel">
+                        <div class="card-header" role="tab" id="headingTwo">
+                            <h5 class="mb-0">
+                                    <a data-toggle="collapse.show" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                         Datos Excel Seleccionado:
+                                    </a>
+                                </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="card-block">
+                                <div class="col-12 table-responsive ">
+                                    <div id="grid1" class="table table-striped table-bordered" ui-grid="gridOptions" ui-grid-selection ui-grid-exporter class="grid"></div>
+                                </div>
+                                <br>
+                                <br>
+
+                                <button type="submit" class="btn btn-danger my-2">Cancelar <i class="fa fa-ban" aria-hidden="true"></i></button>
+                                <button ng-click="llenarCamposExcel();" type="submit" class="btn btn-primary my-2">Generar Informe <i class="fa fa-area-chart" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" ng-show="mostrarTablaExcel">
+                        <div class="card-header" role="tab" id="headingTree">
+                            <h5 class="mb-0">
+                                    <a data-toggle="collapse.show" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                         Graficas
+                                    </a>
+                                </h5>
+                        </div>
+                        <div id="collapseTree" class="collapse show" role="tabpanel" aria-labelledby="headingTree">
+                            <div class="card-block">
+                                
+                                <div class="table-responsive col-md-12">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>MES</th>
+                                                <th>HORA</th>
+                                                <th>PROMEDIO</th>
+                                            </tr>
+                                            <tr ng-repeat="i in promediosxHoraxMes">
+                                                <td>{{i.MES}}</td>
+                                                <td>{{i.HORA}}</td>
+                                                <td>{{i.PROMEDIO}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="submit" class="btn btn-danger my-2">Cancelar <i class="fa fa-ban" aria-hidden="true"></i></button>
+                                <button ng-click="llenarCamposExcel();" type="submit" class="btn btn-primary my-2">Generar Informe <i class="fa fa-area-chart" aria-hidden="true"></i></button>
+                                  <div class="table-responsive col-md-12">
+                                    <h1>-------</h1>
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>MES</th>
+                                                <th>HORA</th>
+                                                <th>PROMEDIO</th>
+                                            </tr>
+                                            <tr ng-repeat="i in promediosxHoraxDiaSemana">
+                                                <td>{{i.MES}}</td>
+                                                <td>{{i.HORA}}</td>
+                                                <td>{{i.PROMEDIO}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="js/jquery-3.2.1.js"></script>
+        <!-- AngularDATABLES -->
+        <script src="js/libs/angular-datatables.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </body>
+
+</html>
