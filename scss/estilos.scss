@@ -26,8 +26,8 @@ html{
 }
 .navbar-light .navbar-nav .nav-link:focus,
 .navbar-light .navbar-nav .nav-link:hover {
-      color:black;
-      background: rgba(255, 255, 255, 0.9);
+      border-bottom:3px solid rgba(255, 255, 255, 0.9);
+      color:white;
 }
 
 .navbar-light .navbar-nav .nav-link  {
@@ -35,9 +35,10 @@ html{
     text-align: center;
 
 }
-.navbar-light .navbar-nav .open > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.open, .navbar-light .navbar-nav .nav-link.active {
-  background:white;
-  color: black;
+.navbar-light .navbar-nav .open > .nav-link, .navbar-light .navbar-nav .active > 
+.nav-link, .navbar-light .navbar-nav .nav-link.open, .navbar-light .navbar-nav .nav-link.active {
+    border-bottom:3px solid rgba(255, 255, 255, 0.9);
+    color:white;
   text-align: center;
 }
 
@@ -69,3 +70,4 @@ html{
     background-color: rgb(225, 31, 42);
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
+

@@ -1,6 +1,6 @@
 (function() {
     /* xlsx.js (C) 2013-present SheetJS -- http://sheetjs.com */
-    var app = angular.module('analisisADO', ['ngAnimate', 'ngTouch', 'ui.grid', 'ui.grid.selection', 'ui.grid.exporter']);
+    var app = angular.module('analisisADO', ['ngAnimate', 'ngTouch', 'ui.grid', 'ui.grid.selection', 'ui.grid.exporter', 'chart.js']);
 
     /* Inject SheetJSExportService */
     app.factory('SheetJSExportService', SheetJSExportService);
@@ -8,7 +8,10 @@
 
     app.controller('analisisCtrl', ['$scope', '$http', 'SheetJSExportService', function($scope, $http, SheetJSExportService) {
         $scope.mostrarPanelSeleccion = true;
+        $scope.mostrarSeleccionTemporada = false;
         $scope.mostrarTablaExcel = true;
+
+
 
         //arreglo con DIA HORA MES
         $scope.datosMesDiaHoraBolesto = [];
@@ -52,7 +55,6 @@
 
 
         $scope.llenarCamposExcel = function() {
-            console.log("click");
 
             $scope.promHora1 = 0;
             //Llenar las olumnas AÑOV MESV DIAV
@@ -97,18 +99,69 @@
                     HORA: $scope.gridOptions.data[i].HORA,
                     BOLETOS: $scope.gridOptions.data[i].BOLETOS
                 }));
+
             }
 
-            //prueba llamar a  validarMesesexistentes para el calculo de promedios por mes 
-            $scope.validarMesesExistentes();
+            // //prueba llamar a  validarMesesexistentes para el calculo de promedios por mes 
+            // $scope.validarMesesExistentes();
 
 
-            //PRUEBA
-            $scope.promedioDiaHora();
+            // //PRUEBA GRAFICA
+            // $scope.graficaHoraPicoxMes();
+
+            // //PRUEBA
+            // $scope.promedioDiaHora();
+            $scope.graficaHoraPicoxMes();
+
 
             $scope.mostrarPanelSeleccion = false;
             $scope.mostrarTablaExcel = true;
+            $scope.mostrarSeleccionTemporada =true;
         }
+        // Funcion grafica
+        $scope.graficaHoraPicoxMes = function () {
+            console.log("GRAFICA");
+            $scope.mesescontenidos = [];
+            $scope.promediosxHoraxMes.forEach(function (Elemento) {
+                
+            });
+            console.log($scope.mesescontenidos);
+
+             
+            $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+            $scope.series = ['Series A','Serie B'];
+            
+            $scope.data = [
+                [65, 59, 80, 81, 56, 55, 40],
+                [45, 50, 70, 75, 50, 30, 40],
+            ];
+
+            $scope.onClick = function (points, evt) {
+                console.log(points, evt);
+            };
+
+            $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+            $scope.options = {
+                scales: {
+                    yAxes: [
+                        {
+                            id: 'y-axis-1',
+                            type: 'linear',
+                            display: true,
+                            position: 'left'
+                        },
+                        {
+                            id: 'y-axis-2',
+                            type: 'linear',
+                            display: true,
+                            position: 'right'
+                        }
+                    ]
+                }
+            };
+        }
+
+
         $scope.validarMesesExistentes = function() {
             // Funcion para validar que meses contiene el exel a analizar
             $scope.mes1 = "";
@@ -162,7 +215,6 @@
                 }
 
             });
-
             if ($scope.mes1 != null && $scope.mes1 != undefined) {
                 $scope.guardarPromedioXmes($scope.mes1);
             }
@@ -200,10 +252,13 @@
                 $scope.guardarPromedioXmes($scope.mes12);
             }
 
+
+
+
         }
-        //==============Funciones para la grafica de horas  pico=================================
+         //==============Funciones para la grafica de horas  pico=================================
         //Guardar promedio a su respectivo array 
-        $scope.guardarPromedioXmes = function(mes) {
+        $scope.guardarPromedioXmes = function (mes) {
             if (mes == "ENERO") {
                 $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
             }
@@ -243,7 +298,7 @@
         }
         //Realiza la sumatoria de todos las horas 0... de un determinado mes se repite ssegun los meses que existan 
         //en el pdf
-        $scope.calcularPromedioXMes = function(mes) {
+        $scope.calcularPromedioXMes = function (mes) {
             $scope.numerodedatos = 0;
             $scope.promedioHORA = 0;
             $scope.promedio = 0;
@@ -268,37 +323,6 @@
             }
             return $scope.promHORA;
             $scope.promHORA = [];
-
-        }
-
-        //========Funciones para la grafica de promedio por dia de la semana por hor========================
-        $scope.promedioDiaHora = function() {
-            console.log("funcion llamada");
-            $scope.numerodedatos = 0;
-            $scope.promedioHORA = 0;
-            $scope.promedio = 0;
-
-            for (v = 0; v < 23; v++) {
-                for (i = 0; i < $scope.datosMesDiaHoraBolesto.length; i++) {
-                    if ($scope.datosMesDiaHoraBolesto[i].HORA == v && angular.uppercase($scope.datosMesDiaHoraBolesto[i].MES) == angular.uppercase("enero")) {
-                        $scope.promedioHORA += parseInt($scope.datosMesDiaHoraBolesto[i].BOLETOS);
-                        $scope.promedio = $scope.promedioHORA;
-                        $scope.numerodedatos++;
-                    }
-                }
-                $scope.promediosxHoraxDiaSemana.push(angular.copy({
-                    MES: enero,
-                    HORA: v,
-                    PROMEDIO: ($scope.promedioHORA / parseInt($scope.numerodedatos))
-                }));
-
-                $scope.numerodedatos = 0;
-                $scope.promedioHORA = 0;
-            }
-            // return $scope.promHORA;
-            // $scope.promHORA = [];
-            console.log($scope.promediosxHoraxDiaSemana);
-
         }
 
 
