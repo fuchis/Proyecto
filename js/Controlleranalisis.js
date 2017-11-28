@@ -10,7 +10,8 @@
         $scope.mostrarPanelSeleccion = true;
         $scope.mostrarSeleccionTemporada = false;
         $scope.mostrarTablaExcel = true;
-
+        $scope.mostrarSeleccionTemporada = false;
+        $scope.FormDia = false;
 
 
         //arreglo con DIA HORA MES
@@ -118,6 +119,13 @@
             $scope.mostrarTablaExcel = true;
             $scope.mostrarSeleccionTemporada =true;
         }
+        
+        $scope.analisisxDia =  function(){
+            $scope.FormDia = true;        
+            $scope.mostrarSeleccionTemporada = false;
+
+        }
+
         // Funcion grafica
         $scope.graficaHoraPicoxMes = function () {
             console.log("GRAFICA");
