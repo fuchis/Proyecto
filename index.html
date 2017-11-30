@@ -192,6 +192,25 @@
                         </div>
                         <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo">
                             <div class="card-block">
+                                <!-- DATOS A GRAFICAR -->
+                                  <div class="table-responsive col-md-12">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>MES</th>
+                                                <th>HORA</th>
+                                                <th>PROMEDIO</th>
+                                            </tr>
+                                            <tr ng-repeat="i in promediosxHoraxMes">
+                                                <td>{{i.MES}}</td>
+                                                <td>{{i.HORA}}</td>
+                                                <td>{{i.PROMEDIO}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                               <!-- /DATOS A GRAFICAR -->
+
                                 <div class="col">
                                     <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
                                     </canvas </div>

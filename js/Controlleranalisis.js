@@ -104,11 +104,9 @@
             }
 
             // //prueba llamar a  validarMesesexistentes para el calculo de promedios por mes 
-            // $scope.validarMesesExistentes();
+             $scope.validarMesesExistentes();
 
 
-            // //PRUEBA GRAFICA
-            // $scope.graficaHoraPicoxMes();
 
             // //PRUEBA
             // $scope.promedioDiaHora();
