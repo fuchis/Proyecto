@@ -114,3 +114,268 @@
                 $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
             }
         }
+
+        // pruebas
+
+        // Funcion grafica
+        $scope.graficaHoraPicoxMes = function () {
+            console.log("GRAFICA");
+            $scope.mesescontenidos = [];
+            $scope.promediosxHoraxMes.forEach(function (Elemento) {
+                
+            });
+            console.log($scope.mesescontenidos);
+
+             
+            $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+            $scope.series = ['Series A','Serie B'];
+            
+            $scope.data = [
+                [65, 59, 80, 81, 56, 55, 40],
+                [45, 50, 70, 75, 50, 30, 40],
+            ];
+
+            $scope.onClick = function (points, evt) {
+                console.log(points, evt);
+            };
+
+            $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+            $scope.options = {
+                scales: {
+                    yAxes: [
+                        {
+                            id: 'y-axis-1',
+                            type: 'linear',
+                            display: true,
+                            position: 'left'
+                        },
+                        {
+                            id: 'y-axis-2',
+                            type: 'linear',
+                            display: true,
+                            position: 'right'
+                        }
+                    ]
+                }
+            };
+        }
+
+
+
+ $scope.validarMesesExistentes = function() {
+            // Funcion para validar que meses contiene el exel a analizar
+            $scope.mes1 = "";
+            $scope.mes2 = "";
+            $scope.mes3 = "";
+            $scope.mes4 = "";
+            $scope.mes5 = "";
+            $scope.mes6 = "";
+            $scope.mes7 = "";
+            $scope.mes8 = "";
+            $scope.mes9 = "";
+            $scope.mes10 = "";
+            $scope.mes11 = "";
+            $scope.mes12 = "";
+            $scope.gridOptions.data.forEach(function(Elemento) {
+                if (angular.uppercase(Elemento.MES) == "ENERO") {
+                    $scope.mes1 = angular.uppercase(Elemento.MES);
+                }
+                if (angular.uppercase(Elemento.MES) == "FEBRERO") {
+                    $scope.mes2 = angular.uppercase(Elemento.MES);
+                }
+                if (angular.uppercase(Elemento.MES) == "MARZO") {
+                    $scope.mes3 = angular.uppercase(Elemento.MES);
+                }
+                if (angular.uppercase(Elemento.MES) == "ABRIL") {
+                    $scope.mes4 = angular.uppercase(Elemento.MES);
+                }
+                if (angular.uppercase(Elemento.MES) == "MAYO") {
+                    $scope.mes5 = angular.uppercase(Elemento.MES);
+                }
+                if (angular.uppercase(Elemento.MES) == "JUNIO") {
+                    $scope.mes6 = angular.uppercase(Elemento.MES);
+                }
+                if (angular.uppercase(Elemento.MES) == "JULIO") {
+                    $scope.mes7 = angular.uppercase(Elemento.MES);
+                }
+                if (angular.uppercase(Elemento.MES) == "AGOSTO") {
+                    $scope.mes8 = angular.uppercase(Elemento.MES);
+                }
+                if (angular.uppercase(Elemento.MES) == "SEPTIEMBRE") {
+                    $scope.mes9 = angular.uppercase(Elemento.MES);
+                }
+                if (angular.uppercase(Elemento.MES) == "OCTUBRE") {
+                    $scope.mes10 = angular.uppercase(Elemento.MES);
+                }
+                if (angular.uppercase(Elemento.MES) == "NOVIEMBRE") {
+                    $scope.mes11 = angular.uppercase(Elemento.MES);
+                }
+                if (angular.uppercase(Elemento.MES) == "DICIEMBRE") {
+                    $scope.mes12 = angular.uppercase(Elemento.MES);
+                }
+
+            });
+            if ($scope.mes1 != null && $scope.mes1 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes1);
+            }
+            if ($scope.mes2 != null && $scope.mes2 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes2);
+            }
+            if ($scope.mes3 != null && $scope.mes3 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes3);
+            }
+            if ($scope.mes4 != null && $scope.mes4 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes4);
+            }
+            if ($scope.mes5 != null && $scope.mes5 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes5);
+            }
+            if ($scope.mes6 != null && $scope.mes6 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes6);
+            }
+            if ($scope.mes7 != null && $scope.mes7 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes7);
+            }
+            if ($scope.mes8 != null && $scope.mes8 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes8);
+            }
+            if ($scope.mes9 != null && $scope.mes9 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes9);
+            }
+            if ($scope.mes10 != null && $scope.mes10 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes10);
+            }
+            if ($scope.mes11 != null && $scope.mes11 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes11);
+            }
+            if ($scope.mes12 != null && $scope.mes12 != undefined) {
+                $scope.guardarPromedioXmes($scope.mes12);
+            }
+
+
+
+
+        }
+         //==============Funciones para la grafica de horas  pico=================================
+        //Guardar promedio a su respectivo array 
+        $scope.guardarPromedioXmes = function (mes) {
+            if (mes == "ENERO") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+            if (mes == "FEBRERO") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+            if (mes == "MARZO") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+            if (mes == "ABRIL") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+            if (mes == "MAYO") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+            if (mes == "JUNIO") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+            if (mes == "JULIO") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+            if (mes == "AGOSTO") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+            if (mes == "SEPTIEMBRE") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+            if (mes == "OCTUBRE") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+            if (mes == "NOVIEMBRE") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+            if (mes == "DICIEMBRE") {
+                $scope.promediosxHoraxMes = $scope.calcularPromedioXMes(mes);
+            }
+
+        }
+        //Realiza la sumatoria de todos las horas 0... de un determinado mes se repite ssegun los meses que existan 
+        //en el pdf
+        $scope.calcularPromedioXMes = function (mes) {
+            $scope.numerodedatos = 0;
+            $scope.promedioHORA = 0;
+            $scope.promedio = 0;
+            //$scope.mes ="";
+            for (v = 0; v <= 23; v++) {
+                for (i = 0; i < $scope.datosMesDiaHoraBolesto.length; i++) {
+                    //console.log(v);
+                    if ($scope.datosMesDiaHoraBolesto[i].HORA == v && angular.uppercase($scope.datosMesDiaHoraBolesto[i].MES) == mes) {
+                        $scope.promedioHORA += parseInt($scope.datosMesDiaHoraBolesto[i].BOLETOS);
+                        $scope.promedio = $scope.promedioHORA;
+                        $scope.numerodedatos++;
+                        //$scope.mes = $scope.datosMesDiaHoraBolesto[i].MES;
+                    }
+                }
+                $scope.promHORA.push(angular.copy({
+                    MES: mes,
+                    HORA: v,
+                    PROMEDIO: ($scope.promedioHORA / parseInt($scope.numerodedatos))
+                }));
+                $scope.numerodedatos = 0;
+                $scope.promedioHORA = 0;
+            }
+            return $scope.promHORA;
+            $scope.promHORA = [];
+        }
+
+
+         $scope.datosSeleccionados = $scope.gridOptions.data;
+
+            $scope.promHora1 = 0;
+            //Llenar las olumnas AÑOV MESV DIAV
+            for (var i in $scope.gridOptions.data) {
+                //Llenar la columna AÑOV que no cuenta con algun dato toma el valor anterior 
+                // Se repite para DIAV Y MESV
+                if ($scope.gridOptions.data[i].AÑOV == undefined) {
+                    $scope.gridOptions.data[i].AÑOV = $scope.gridOptions.data[i - 1].AÑOV;
+                }
+                if ($scope.gridOptions.data[i].MESV == undefined) {
+                    $scope.gridOptions.data[i].MESV = $scope.gridOptions.data[i - 1].MESV;
+                }
+                if ($scope.gridOptions.data[i].DIAV == undefined) {
+                    $scope.gridOptions.data[i].DIAV = $scope.gridOptions.data[i - 1].DIAV;
+                }
+            }
+            //Llenar las columnas  FECHA DIA MES
+            $scope.dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+            $scope.meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+
+            $scope.gridOptions.data.forEach(function(Elemento) {
+                $scope.date = new Date(Elemento.AÑOV + "-" + Elemento.MESV + "-" + Elemento.DIAV);
+
+                $scope.fechaNum = $scope.date.getDay() + 1;
+                $scope.mes_name = $scope.date.getMonth();
+                $scope.year = $scope.date.getFullYear();
+
+
+                let options = {
+                    weekday: 'long'
+                };
+
+                Elemento.FECHA = Elemento.DIAV + '/' + $scope.meses[$scope.mes_name] + '/' + $scope.year;
+                Elemento.DIA = $scope.date.toLocaleDateString('es-MX', options);
+                Elemento.MES = $scope.meses[$scope.mes_name];
+
+            });
+            for (var i in $scope.gridOptions.data) {
+                $scope.datosMesDiaHoraBolesto.push(angular.copy({
+                    DIA: $scope.gridOptions.data[i].DIA,
+                    MES: $scope.gridOptions.data[i].MES,
+                    HORA: $scope.gridOptions.data[i].HORA,
+                    BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                }));
+
+            }
+
+            // //prueba llamar a  validarMesesexistentes para el calculo de promedios por mes 
+
+
+           
