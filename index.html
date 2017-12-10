@@ -26,7 +26,7 @@
     <!-- Incluir Fuentes de Font Awesome -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- Incluir estilos css -->
-    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="scss/estilos.css">
     <!-- Incluir ControladorAngular -->
     <script src="js/Controlleranalisis.js"></script>
     <!-- Incluir Chartjs -->
@@ -129,7 +129,7 @@
                                                 <div class="card-body">
                                                     <h4 class="card-title">Día</h4>
                                                     <p class="card-text">En esta opcion podrás realizar tu analis por un rango de dias .</p>
-                                                    <a href="#FormDia" ng-click="analisisxDia()" class="btn btn-primary">Seleccionar</a>
+                                                    <a href="#FormDia" ng-click="mostrarFormAnalisisXdia()" class="btn btn-primary">Seleccionar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,7 +138,7 @@
                                                 <div class="card-body">
                                                     <h4 class="card-title">Mes</h4>
                                                     <p class="card-text">En esta opcion podrás realizar tu analis por mes o por meses .</p>
-                                                    <a href="#" class="btn btn-primary">Seleccionar</a>
+                                                    <a href="#FormMes" ng-click="mostrarFormAnalisisXMes()"  class="btn btn-primary">Seleccionar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -147,7 +147,7 @@
                                                 <div class="card-body">
                                                     <h4 class="card-title">General</h4>
                                                     <p class="card-text">En esta opcion podrás realizar el analisis de todo el archivo seleccionado .</p>
-                                                    <a href="#" class="btn btn-primary">Seleccionar</a>
+                                                    <a ng-click="realizarAnalisisGeneral()" class="btn btn-primary">Seleccionar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -163,12 +163,59 @@
                                                         <option value="">seleccione</option>
                                                     </select>
                                                 </div>
+                                                 <div class="card" ng-show="seleccionRangosDias">
+                                                  <div class="card-header">
+                                                    Rango de dias a analizar
+                                                  </div>
+                                                  <div class="card-body">
+                                                    <blockquote class="blockquote mb-0">
+                                                        <div class="form-group">
+                                                    <label for="">DiaInicio: </label>
+                                                    <select class="form-control" ng-options=" dia for dia in diasMes" ng-model="diaInicio" ng-change="">
+                                                        <option value="">seleccione</option>
+                                                    </select>
+                                                </div>
+                                                 <div class="form-group">
+                                                    <label for="">DiaFinal: </label>
+                                                    <select class="form-control" ng-options=" dia for dia in diasMes" ng-model="diaFinal" ng-change="">
+                                                        <option value="">seleccione</option>
+                                                    </select>
+                                                </div>
+                                                    </blockquote>
+                                                  </div>
+                                                </div>
+                                              
+                                               
                                                 <div class="form-group">
                                                     <label for="">Promedio De Venta</label>
-                                                    <input type="text" class="form-control">
+                                                    <input ng-model ="promedioAnalisisxDia" type="text" class="form-control">
                                                 </div>
                                                
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button type="submit"  ng-click="realizarAnalisisxDia()"class="btn btn-primary">Realizar Analisis</button>
+                                                <a ng-click="Regresar()"  class="btn btn-danger">Regresar</a>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="FormMes">
+                                        <!-- Formulario por dia -->
+                                        <div class="col my-4" id="FormMes">
+                                            <form>
+                                                <h2 class="text-center">Análisis por Mes</h2>
+                                                <div class="form-group">
+                                                    <label for="">Mes: </label>
+                                                    <select class="form-control" ng-options=" mes for mes in MesesExistentes" ng-model="mesSeleccionado" ng-change="traerDatosMes()">
+                                                        <option >seleccione</option>
+                                                    </select>
+                                                </div>                                            
+                                                <div class="form-group">
+                                                    <label for="">Promedio De Venta</label>
+                                                    <input ng-model ="promedioAnalisisxMes" type="text" class="form-control">
+                                                </div>
+                                               
+                                                <button type="submit"  ng-click="realizarAnalisisxMes()"class="btn btn-primary">Realizar Analisis</button>
+                                                <a ng-click="Regresar()"  class="btn btn-danger">Regresar</a>
+
                                             </form>
                                         </div>
                                     </div>

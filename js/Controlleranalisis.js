@@ -12,12 +12,16 @@
         $scope.mostrarTablaExcel = true;
         $scope.mostrarSeleccionTemporada = false;
         $scope.FormDia = false;
+        $scope.FormMes = false;        
+
 
 
         //variablles que muestran campos segun los datos
         $scope.analisixDia = false;
         $scope.analisixMes= false;
         $scope.analisiGeneral = false;
+
+        $scope.seleccionRangosDias = false;
 
         // array que guarda listado de meses
         $scope.MesesExistentes = []; 
@@ -40,12 +44,11 @@
         $scope.datosMesDiciembre= []; 
  
 
-        //Funciones para exportar el excel
         $scope.gridOptions = {
             columnDefs: [
 
             ],
-            enableGridMenu: true,
+            enableGridMenu: false,
             enableSelectAll: true,
             exporterMenuPdf: false,
             exporterMenuCsv: false,
@@ -54,28 +57,31 @@
                 $scope.gridApi = gridApi;
             },
             /* SheetJS Service setup */
-            filename: "SheetJSAngular",
+            filename: "Analisis",
             sheetname: "ng-SheetJS",
             gridMenuCustomItems: [{
-                title: 'Export all data as XLSX',
-                action: function($event) {
-                    SheetJSExportService.exportXLSX($scope.gridApi);
-                },
-                order: 200
-            }, {
-                title: 'Export all data as XLSB',
-                action: function($event) {
-                    SheetJSExportService.exportXLSB($scope.gridApi);
-                },
-                order: 201
+            //     title: 'Export all data as XLSX',
+            //     action: function($event) {
+            //         SheetJSExportService.exportXLSX($scope.gridApi);
+            //     },
+            //     order: 200
+            // }, {
+            //     title: 'Export all data as XLSB',
+            //     action: function($event) {
+            //         SheetJSExportService.exportXLSB($scope.gridApi);
+            //     },
+            //     order: 201
             }],
 
         };
 
 
-      
+        $scope.cargar = 0;
         $scope.llenarCamposExcel = function() {
-               for (var i in $scope.gridOptions.data) {
+            $scope.cargar ++;
+            console.log($scope.cargar);
+               if($scope.cargar == 1){
+                for (var i in $scope.gridOptions.data) {
                 //Llenar la columna AÑOV que no cuenta con algun dato toma el valor anterior 
                 // Se repite para DIAV Y MESV
                 if ($scope.gridOptions.data[i].AÑOV == undefined) {
@@ -109,8 +115,11 @@
                 Elemento.MES = $scope.meses[$scope.mes_name];
 
             });
-            
-          $scope.guardarMeses();
+            $scope.guardarMeses();
+
+        }else{
+            alert("Se esta cargando su archivo");
+        }
 
         }
         
@@ -132,14 +141,18 @@
                     $scope.datosMesFebrero.push(angular.copy({
                       DIA: $scope.gridOptions.data[i].DIA,
                       HORA: $scope.gridOptions.data[i].HORA,
-                      BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                      BOLETOS: $scope.gridOptions.data[i].BOLETOS,
+                      NUMERODIA : $scope.gridOptions.data[i].DIAV
+
                     }));
                 }
                 if($scope.gridOptions.data[i].MESV == '3'){
                     $scope.datosMesMarzo.push(angular.copy({
                       DIA: $scope.gridOptions.data[i].DIA,
                       HORA: $scope.gridOptions.data[i].HORA,
-                      BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                      BOLETOS: $scope.gridOptions.data[i].BOLETOS,
+                      NUMERODIA : $scope.gridOptions.data[i].DIAV
+
                     }));
 
                 }
@@ -147,7 +160,9 @@
                     $scope.datosMesAbril.push(angular.copy({
                       DIA: $scope.gridOptions.data[i].DIA,
                       HORA: $scope.gridOptions.data[i].HORA,
-                      BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                      BOLETOS: $scope.gridOptions.data[i].BOLETOS,
+                      NUMERODIA : $scope.gridOptions.data[i].DIAV
+
                     }));
 
                 }
@@ -155,7 +170,9 @@
                     $scope.datosMesMayo.push(angular.copy({
                       DIA: $scope.gridOptions.data[i].DIA,
                       HORA: $scope.gridOptions.data[i].HORA,
-                      BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                      BOLETOS: $scope.gridOptions.data[i].BOLETOS,
+                      NUMERODIA : $scope.gridOptions.data[i].DIAV
+
                     }));
 
                 }
@@ -163,7 +180,9 @@
                     $scope.datosMesJunio.push(angular.copy({
                       DIA: $scope.gridOptions.data[i].DIA,
                       HORA: $scope.gridOptions.data[i].HORA,
-                      BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                      BOLETOS: $scope.gridOptions.data[i].BOLETOS,
+                      NUMERODIA : $scope.gridOptions.data[i].DIAV
+
                     }));
 
                 }
@@ -171,7 +190,9 @@
                     $scope.datosMesJulio.push(angular.copy({
                       DIA: $scope.gridOptions.data[i].DIA,
                       HORA: $scope.gridOptions.data[i].HORA,
-                      BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                      BOLETOS: $scope.gridOptions.data[i].BOLETOS,
+                      NUMERODIA : $scope.gridOptions.data[i].DIAV
+
                     }));
 
                 }
@@ -179,7 +200,9 @@
                     $scope.datosMesAgosto.push(angular.copy({
                       DIA: $scope.gridOptions.data[i].DIA,
                       HORA: $scope.gridOptions.data[i].HORA,
-                      BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                      BOLETOS: $scope.gridOptions.data[i].BOLETOS,
+                      NUMERODIA : $scope.gridOptions.data[i].DIAV
+
                     }));
 
                 }
@@ -187,7 +210,9 @@
                     $scope.datosMesSeptiembre.push(angular.copy({
                       DIA: $scope.gridOptions.data[i].DIA,
                       HORA: $scope.gridOptions.data[i].HORA,
-                      BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                      BOLETOS: $scope.gridOptions.data[i].BOLETOS,
+                      NUMERODIA : $scope.gridOptions.data[i].DIAV
+
                     }));
 
                 }
@@ -195,7 +220,9 @@
                     $scope.datosMesOctubre.push(angular.copy({
                       DIA: $scope.gridOptions.data[i].DIA,
                       HORA: $scope.gridOptions.data[i].HORA,
-                      BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                      BOLETOS: $scope.gridOptions.data[i].BOLETOS,
+                      NUMERODIA : $scope.gridOptions.data[i].DIAV
+
                     }));
 
                 }
@@ -203,7 +230,9 @@
                     $scope.datosMesNoviembre.push(angular.copy({
                       DIA: $scope.gridOptions.data[i].DIA,
                       HORA: $scope.gridOptions.data[i].HORA,
-                      BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                      BOLETOS: $scope.gridOptions.data[i].BOLETOS,
+                      NUMERODIA : $scope.gridOptions.data[i].DIAV
+
                     }));
 
                 }
@@ -211,7 +240,9 @@
                     $scope.datosMesDiciembre.push(angular.copy({
                       DIA: $scope.gridOptions.data[i].DIA,
                       HORA: $scope.gridOptions.data[i].HORA,
-                      BOLETOS: $scope.gridOptions.data[i].BOLETOS
+                      BOLETOS: $scope.gridOptions.data[i].BOLETOS,
+                      NUMERODIA : $scope.gridOptions.data[i].DIAV
+
                     }));
 
                 }
@@ -290,58 +321,303 @@
 
         }
         $scope.traerDatosMes = function(){
-            if($scope.mesSeleccionado == "Enero"){
-                $scope.datosMesEnero.forEach(function(Elemento) {
-                    console.log(Elemento.NUMERODIA);
+                $scope.seleccionRangosDias = false;
 
-                });
-              
-                // FALTA SACAR LOS DIAS QUE HAY EN ENERO
-                //SE REPITE POR CADA MES
-                console.log($scope.diasMes);
+             if($scope.mesSeleccionado == "Enero"){
+               $scope.diasMes = [];
+               $scope.diaInicio = 0;
+               $scope.diaFinal = 0;
+
+                for (var i = 0; i <$scope.datosMesEnero.length; i++) {
+                    $scope.diasMes.push($scope.datosMesEnero[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
 
             }
             if($scope.mesSeleccionado == "Febrero"){
+             $scope.diasMes = [];
+             $scope.diaInicio = 0;
+             $scope.diaFinal = 0;
+                for (var i = 0; i <$scope.datosMesFebrero.length; i++) {
+                    $scope.diasMes.push($scope.datosMesFebrero[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
 
             }
             if($scope.mesSeleccionado == "Marzo"){
+               $scope.diasMes = [];
+               $scope.diaInicio = 0;
+               $scope.diaFinal = 0;
+
+                for (var i = 0; i <$scope.datosMesMarzo.length; i++) {
+                    $scope.diasMes.push($scope.datosMesMarzo[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
 
             }
             if($scope.mesSeleccionado == "Abril"){
+               $scope.diasMes = [];
+               $scope.diaInicio = 0;
+               $scope.diaFinal = 0;
+                for (var i = 0; i <$scope.datosMesAbril.length; i++) {
+                    $scope.diasMes.push($scope.datosMesAbril[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
+
 
             }
             if($scope.mesSeleccionado == "Mayo"){
+              $scope.diasMes = [];
+               $scope.diaInicio = 0;
+               $scope.diaFinal = 0;
+
+                  for (var i = 0; i <$scope.datosMesMayo.length; i++) {
+                    $scope.diasMes.push($scope.datosMesMayo[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
+
 
             }
             if($scope.mesSeleccionado == "Junio"){
+               $scope.diasMes = [];
+               $scope.diaInicio = 0;
+               $scope.diaFinal = 0;
+
+                for (var i = 0; i <$scope.datosMesJunio.length; i++) {
+                    $scope.diasMes.push($scope.datosMesJunio[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
 
             }
             if($scope.mesSeleccionado == "Julio"){
+               $scope.diasMes = [];
+               $scope.diaInicio = 0;
+               $scope.diaFinal = 0;
+                for (var i = 0; i <$scope.datosMesJulio.length; i++) {
+                    $scope.diasMes.push($scope.datosMesJulio[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
 
             }
             if($scope.mesSeleccionado == "Agosto"){
+                $scope.diasMes = [];
+               $scope.diaInicio = 0;
+               $scope.diaFinal = 0;
+
+                for (var i = 0; i <$scope.datosMesAgosto.length; i++) {
+                    $scope.diasMes.push($scope.datosMesAgosto[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
 
             }
             if($scope.mesSeleccionado == "Septiembre"){
+                $scope.diasMes = [];
+               $scope.diaInicio = 0;
+               $scope.diaFinal = 0;
+
+                for (var i = 0; i <$scope.datosMesSeptiembre.length; i++) {
+                    $scope.diasMes.push($scope.datosMesSeptiembre[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
 
             }
             if($scope.mesSeleccionado == "Octubre"){
+                  $scope.diasMes = [];
+               $scope.diaInicio = 0;
+               $scope.diaFinal = 0;
+
+                for (var i = 0; i <$scope.datosMesOctubre.length; i++) {
+                    $scope.diasMes.push($scope.datosMesOctubre[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
 
             }
             if($scope.mesSeleccionado == "Noviembre"){
+               $scope.diasMes = [];
+               $scope.diaInicio = 0;
+               $scope.diaFinal = 0;
+                for (var i = 0; i <$scope.datosMesNoviembre.length; i++) {
+                    $scope.diasMes.push($scope.datosMesNoviembre[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
 
             }
             if($scope.mesSeleccionado == "Diciembre"){
+                $scope.diasMes = [];
+               $scope.diaInicio = 0;
+               $scope.diaFinal = 0;
+                for (var i = 0; i <$scope.datosMesDiciembre.length; i++) {
+                    $scope.diasMes.push($scope.datosMesDiciembre[i].NUMERODIA);
+                }
+                
+                for (var i = 1; i < $scope.diasMes.length; ) {
+                    if ($scope.diasMes[i-1] === $scope.diasMes[i])
+                       $scope.diasMes.splice(i,1);
+                   else
+                      i++;
+                }
+                $scope.diasMes.sort((a, b) => a - b );
+                $scope.seleccionRangosDias = true;
+                $scope.diaInicio = $scope.diasMes[0];
+                $scope.diaFinal = $scope.diasMes[$scope.diasMes.length-1];
 
             }
 
 
         }
-        
-        $scope.analisisxDia =  function(){
+        $scope.Regresar = function(){
+            $scope.FormDia=false;
+            $scope.FormMes = false;
+            $scope.seleccionRangosDias = false;
+            $scope.mesSeleccionado = 0;
+            $scope.diaInicio=null;
+            $scope.diaFinal=null;
+            $scope.promedioAnalisisxDia=null;
+            $scope.promedioAnalisisxMes=null;
+            $scope.mostrarSeleccionTemporada = true;
+            // _messageHTML("Puntos", "¡El numero de puntos debe ser mayor a 3!", "warning");
+
+
+        }
+        // REALIZAR ANALISIS POR DIA
+        $scope.mostrarFormAnalisisXdia =  function(){
             $scope.FormDia = true;        
             $scope.mostrarSeleccionTemporada = false;
 
+        }
+
+        $scope.realizarAnalisisxDia = function(){
+            console.log($scope.mesSeleccionado);
+            console.log($scope.diaInicio);
+            console.log($scope.diaFinal);
+            console.log($scope.promedioAnalisisxDia);
+        }
+        
+        //REALIZAR ANALISIS POR MES
+
+        $scope.mostrarFormAnalisisXMes =  function(){
+            $scope.FormMes = true;        
+            $scope.mostrarSeleccionTemporada = false;
+
+        }
+
+        $scope.realizarAnalisisxMes= function(){
+            console.log($scope.mesSeleccionado);
+            console.log($scope.promedioAnalisisxMes);
+        }
+        //REALIZAR ANALISIS GENERAL
+        $scope.realizarAnalisisGeneral = function(){
+            console.log('Analisis General');
         }
 
 
