@@ -969,7 +969,7 @@
              }; 
 
             $scope.onClick = function (points, evt) {
-                console.log(points, evt);
+            console.log(points, evt);
             };
 
           }
@@ -978,4 +978,4 @@
 
     app.directive("importSheetJs", [SheetJSImportDirective]);
 
-})();
+})(); //
