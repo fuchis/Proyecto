@@ -100,6 +100,7 @@
                                     <button type="submit" class="btn btn-danger my-2">Cancelar <i class="fa fa-ban" aria-hidden="true"></i></button>
                                 </a>
                                 <button ng-click="llenarCamposExcel();" type="submit" class="btn btn-primary my-2">CargarExcel <i class="fa fa-upload" aria-hidden="true"></i></button>
+
                             </div>
                         </div>
                     </div>
@@ -149,8 +150,10 @@
                                                     <p class="card-text">En esta opcion podrás realizar el analisis de todo el archivo seleccionado .</p>
                                                     <a ng-click="realizarAnalisisGeneral()" class="btn btn-primary">Seleccionar</a>
                                                 </div>
+                                                
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="row" ng-show="FormDia">
                                         <!-- Formulario por dia -->
@@ -222,6 +225,13 @@
                                 </div>
                                 <br>
                                 <br>
+                                <!-- CANVAS PARA GRAFICAR -->
+                                <canvas id="line" chart="chart" class="chart chart-line" chart-data="data" chart-legend="true" chart-labels="labels" chart-series="series" 
+                                chart-options="options" chart-colors="colors"  chart-click="onClick">
+                                </canvas>
+
+
+
                             </div>
                         </div>
                     </div>
